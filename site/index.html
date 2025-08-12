@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Real-Time Earthquake Alerts</title>
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;margin:24px;max-width:860px}
+    h1{margin:0 0 8px}
+    .muted{color:#666;font-size:12px}
+    .card{border:1px solid #ddd;border-radius:12px;padding:14px;margin:10px 0}
+    .pill{display:inline-block;padding:2px 8px;border:1px solid #ccc;border-radius:999px;margin-right:6px}
+    .k{font-weight:600}
+  </style>
+</head>
+<body>
+  <h1>🌍 Real-Time Earthquake Alerts</h1>
+  <div class="muted" id="ts">Loading…</div>
+  <div id="list"></div>
+
+<script>
+async function go(){
+  try{
+    const r = await fetch('alerts.json?x=' + Date.now());
+    const data = await r.json();
+    const alerts = data.alerts || [];
+    document.getElementById('ts').textContent =
+      'Last updated: ' + new Date().toLocaleString();
+    const box = document.getElementById('list');
+    box.innerHTML = '';
+    if(alerts.length === 0){
+      box.innerHTML = '<div class="card">No recent alerts.</div>';
+      return;
+    }
+    for(const a of alerts){
+      const d = a.data || {};
+      const el = document.createElement('div');
+      el.className = 'card';
+      el.innerHTML = `
+        <div>
+          <span class="pill">M ${d.magnitude ?? 'N/A'}</span>
+          <span class="pill">${d.depth_km ?? 'N/A'} km</span>
+          <span class="pill">${d.tsunami ? 'Tsunami' : 'No Tsunami'}</span>
+        </div>
+        <div style="margin-top:6px"><span class="k">Place:</span> ${d.place ?? '-'}</div>
+        <div><span class="k">Time (UTC):</span> ${d.time_utc ?? '-'}</div>
+        <div style="margin-top:6px"><span class="k">AI:</span> ${a.summary ?? '-'}</div>
+        ${d.source ? `<div class="muted" style="margin-top:6px"><a href="${d.source}" target="_blank">USGS Source</a></div>`:''}
+      `;
+      box.appendChild(el);
+    }
+  }catch(e){
+    document.getElementById('list').innerHTML =
+      '<div class="card">Cannot load alerts.json yet.</div>';
+  }
+}
+go();
+setInterval(go, 30000);
+</script>
+</body>
+</html>
