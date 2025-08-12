@@ -6,13 +6,13 @@ An end-to-end **serverless disaster alert platform** using **AWS Cloud**, **Gene
 - **Real-time earthquake alerts** from the USGS global feed
 - **AI-generated summaries** (OpenRouter / HuggingFace)
 - **Serverless architecture** (AWS Lambda, S3, DynamoDB)
-- **Automated deployments** with Terraform
+- **Automated deployments** with Manual AWS Console Setup
 - **Cost-efficient & scalable**
 
 ## 🛠 Tech Stack
 - **AWS:** Lambda, S3, DynamoDB, EventBridge
 - **AI:** OpenRouter + Qwen LLM / HuggingFace
-- **IaC:** Terraform
+- **IaC:** Manual AWS Console Setup
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Python 3.12
 
@@ -42,11 +42,11 @@ USGS Earthquake API → Lambda (Python) → AI Model → DynamoDB + S3 (alerts.j
    ```
 2. **Deploy infrastructure**  
    - Configure AWS CLI  
-   - Update `terraform.tfvars`  
+   - Update `manual AWS console setup.tfvars`  
    - Run:
      ```bash
-     terraform init
-     terraform apply
+     manual AWS console setup init
+     manual AWS console setup apply
      ```
 
 3. **Upload Lambda code**
