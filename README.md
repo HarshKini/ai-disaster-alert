@@ -22,12 +22,22 @@ USGS Earthquake API → Lambda (Python) → AI Model → DynamoDB + S3 (alerts.j
 ```
 
 ## 📸 Screenshots
-*(Add images here)*
+
+### 1. **Live AI-Powered Earthquake Alert Dashboard**
+![Live Dashboard Screenshot](screenshots/dashboard.png)
+
+### 2. **AWS Lambda Logs**
+![Lambda Logs](screenshots/lambda-logs.png)
+
+### 3. **DynamoDB Records**
+![DynamoDB Screenshot](screenshots/dynamodb.png)
+
+*(Add your actual screenshots in the `screenshots/` folder — these images will display automatically on GitHub.)*
 
 ## 🧑‍💻 Setup Instructions
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/ai-disaster-alert.git
+   git clone https://github.com/HarshKini/ai-disaster-alert.git
    cd ai-disaster-alert
    ```
 2. **Deploy infrastructure**  
